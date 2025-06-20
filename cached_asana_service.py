@@ -134,7 +134,8 @@ class CachedAsanaService:
                     # Parse completed date
                     completed_at = datetime.fromisoformat(task['completed_at'].replace('Z', '+00:00'))
                     # Calculate duration in days
-                    duration_days = (completed_at - created_at).days
+                    duration_hours = (completed_at - created_at).total_seconds() / 3600
+                    duration_days = duration_hours / 24
                     # Store duration by assignee (only for completed tasks)
                     assignee_durations[assignee_key].append(duration_days)
                 
